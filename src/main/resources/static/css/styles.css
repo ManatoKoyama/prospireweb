@@ -1,0 +1,321 @@
+/* ======================================================= */
+/* 基本設定と共通変数 (BASE & VARIABLES)                */
+/* ======================================================= */
+
+:root {
+    /* --- 共通カラーパレット --- */
+    --main-accent: #3b82f6;  /* 💡 主要な青 (モダンなスカイブルー) */
+    --accent-hover: #2563eb; /* アクセントのホバー色 */
+    --text-color: #374151;   /* 濃い灰色 (標準テキスト) */
+    --text-light: #6b7280;   /* 薄いテキスト色 */
+    --white-bg: #ffffff;
+    --light-bg: #f9fafb;     /* 非常に明るいグレーの背景 */
+    --border-color: #e5e7eb; /* 薄いボーダー */
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --radius-md: 0.5rem;     /* 8px の角丸 */
+
+    /* --- ログイン画面固有 --- */
+    --login-background: #f0f4f8; /* 淡い青みがかった背景 */
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.2); 
+}
+
+/* --- リセット/基本設定 --- */
+* {
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--light-bg); 
+    color: var(--text-color);
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; /* モダンなフォントに */
+    margin: 0;
+}
+
+/* --- フォームの入力要素 (共通) --- */
+input, select {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md); 
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, select:focus {
+    border-color: var(--main-accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    outline: none;
+}
+
+/* ======================================================= */
+/* ログイン画面専用スタイル (LOGIN SCREEN)              */
+/* ======================================================= */
+
+.login-body {
+    background-color: var(--login-background); 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+/* --- ログインカード --- */
+.login-card {
+    background-color: var(--white-bg);
+    border-radius: var(--radius-md); 
+    padding: 40px;
+    box-shadow: var(--shadow-light); 
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+.login-card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+/* --- ログインロゴ --- */
+.login-logo {
+    max-width: 200px; 
+    height: auto;
+    margin: 0 auto 30px auto; 
+    display: block; 
+}
+
+/* --- タイトル --- */
+.system-title {
+    margin-bottom: 30px;
+    line-height: 1.2;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+.system-name {
+    display: block;
+    font-size: 14px; 
+    font-weight: 500;
+    color: var(--text-light); 
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+.login-prompt {
+    display: block;
+    font-size: 28px; 
+    font-weight: 700;
+    color: var(--text-color); 
+}
+
+/* --- フォーム要素 --- */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* --- ボタンラッパー --- */
+.login-form .button-group {
+    margin-top: 10px; 
+    margin-bottom: 20px; 
+    width: 100%;
+}
+
+/* --- サインインボタン --- */
+.submit-button {
+    background-color: var(--main-accent);
+    color: var(--white-bg);
+    border: none;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.submit-button:hover {
+    background-color: var(--accent-hover); 
+}
+
+/* --- メッセージエリア --- */
+.message {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+.error-message {
+    background-color: #fce3e7; /* 薄い赤 */
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+.success-message {
+    background-color: #d1fae5; /* 薄い緑 */
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+/* --- パスワード忘れメッセージ --- */
+.forgot-password {
+    display: block;
+    margin-top: 15px;
+    font-size: 0.65rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/* ======================================================= */
+/* サイドバーとメニュー (SIDEBAR & NAVIGATION)          */
+/* ======================================================= */
+
+/* ===== レイアウト（Flexbox） ===== */
+.app-container {
+    display: flex; 
+    min-height: 100vh;
+    border: none;
+}
+
+/* --- サイドバー全体のラッパー --- */
+.sidebar-wrapper {
+    width: 240px; 
+    display: flex;
+    flex-direction: column; 
+    flex-shrink: 0; 
+    
+    background-color: var(--white-bg); /* サイドバーも白基調に */
+    border-right: 1px solid var(--border-color);
+    min-height: 100vh;
+    box-shadow: var(--shadow-sm); 
+}
+
+/* --- サイドバーヘッダー (ロゴ用) --- */
+.sidebar-header {
+    padding: 20px 15px; 
+    text-align: center; 
+    border-bottom: 1px solid var(--border-color); 
+}
+
+.sidebar-logo {
+    max-width: 160px; 
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* --- メニューボタンのスタイル --- */
+.sidebar {
+    flex-grow: 1; 
+    padding: 10px 0; /* メニューリストの全体パディング */
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-list a {
+    display: block;
+    padding: 10px 20px; 
+    margin: 4px 10px; /* マージンでボタンを分離 */
+    
+    background-color: transparent;
+    border-radius: 6px; 
+    color: var(--text-color);
+    text-align: left; /* 左寄せ */
+    text-decoration: none;
+    font-weight: 500;
+    
+    border-bottom: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.menu-list a:hover {
+    background-color: var(--light-bg);
+    color: var(--main-accent);
+}
+
+/* --- ログアウトフッター --- */
+.sidebar-footer {
+    padding: 15px 10px; 
+    border-top: 1px solid var(--border-color); 
+    text-align: center; 
+}
+
+.logout-button {
+    width: 90%; 
+    padding: 10px;
+    background-color: #ef4444; 
+    color: var(--white-bg);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+.logout-button:hover {
+    background-color: #dc2626;
+}
+
+/* ======================================================= */
+/* メインコンテンツ (TOP / DASHBOARD)                   */
+/* ======================================================= */
+
+/* --- メインコンテンツエリア --- */
+.content-area {
+    flex: 1; 
+    padding: 30px;
+    background-color: var(--light-bg); 
+}
+
+.main-title {
+    font-size: 26px;
+    color: var(--text-color);
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* --- カードレイアウト --- */
+.card-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* レスポンシブ対応の列 */
+}
+
+.dashboard-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    background-color: var(--white-bg); 
+    transition: transform 0.2s;
+}
+.dashboard-card:hover {
+    transform: translateY(-2px);
+}
+
+.dashboard-card h3 {
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* --- プレースホルダー/枠 --- */
+.info-box {
+    border: 1px dashed var(--text-light); 
+    border-radius: 4px;
+    padding: 15px;
+    min-height: 100px;
+    font-size: 14px;
+    color: var(--text-light);
+    background-color: transparent;
+}

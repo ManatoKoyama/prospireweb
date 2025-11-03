@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ログイン</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-card">
+
+            <img th:src="@{/images/prospire_logo.png}" alt="Pro-SPIRE ロゴ" class="login-logo">
+
+            <h1 class="system-title">
+                <span class="system-name">予算実績管理システム</span>
+                <span class="login-prompt">サインイン</span>
+            </h1>
+            
+            <div th:if="${param.error}" class="message error-message">
+                ユーザーIDまたはパスワードが不正です。
+            </div>
+            
+            <div th:if="${param.logout}" class="message success-message">
+                ログアウトしました。
+            </div>
+
+            <form th:action="@{/doLogin}" method="post" class="login-form">
+                <div class="form-group">
+                    <label for="username">ユーザーID</label>
+                    <input type="text" id="username" name="username" required/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">パスワード</label>
+                    <input type="password" id="password" name="password" required/>
+                </div>
+                
+                <div class="button-group"> 
+                    <button type="submit" class="submit-button">サインイン</button>
+                </div>
+            </form>
+            
+            <span class="forgot-password">※パスワードを忘れた方は管理者に問い合わせしてください。</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" />
+    <title>TOP</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="app-container">
+        
+        <div th:insert="fragments/menu_structure :: layoutContent"></div>
+        
+        <main class="content-area">
+            
+            <h2 class="main-title">ダッシュボード</h2> 
+            
+            <div class="card-grid">
+                
+                <div class="dashboard-card">
+                    <h3>お知らせ</h3>
+                    <div class="card-content">
+                        <div class="info-box">
+                            まだ、実装はしないが枠だけ確保
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>今月の予算 / 見込み</h3>
+                    <div class="card-content">
+                        <div class="info-box">
+                            まだ、実装はしないが枠だけ確保
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
