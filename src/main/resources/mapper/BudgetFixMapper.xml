@@ -1,0 +1,4 @@
+  <select id="find" resultType="com.prospire.prospireweb.model.GetBudget">
+  	select	*
+  	from	xxx <--'xxx'ここに予算テーブル入れる-->
+  </select>
