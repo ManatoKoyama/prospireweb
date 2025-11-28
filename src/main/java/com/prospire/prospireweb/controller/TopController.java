@@ -12,4 +12,9 @@ public class TopController {
     public String top(){
         return "top"; // top.html を表示
     }
+
+    @GetMapping("/achievements")
+    public String achievements(){
+        return "achievements"; // achievements.html を表示
+    }
 }
