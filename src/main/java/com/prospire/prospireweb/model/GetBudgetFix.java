@@ -10,7 +10,7 @@ import lombok.Data;
  */
 
 @Data
-public class GetBudget {
+public class GetBudgetFix {
   private String ki;                //対象期
   private String bu;                //対象BU
   private String customer;          //顧客

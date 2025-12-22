@@ -319,3 +319,10 @@ input:focus, select:focus {
     color: var(--text-light);
     background-color: transparent;
 }
+
+/* ======================================================= */
+/* 予算FIX　　　　　　　　　　　　　　　　                    */
+/* ======================================================= */
+.aaa {
+  display: flex;
+}

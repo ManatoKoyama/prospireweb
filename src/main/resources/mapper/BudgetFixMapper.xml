@@ -1,4 +1,17 @@
-  <select id="find" resultType="com.prospire.prospireweb.model.GetBudget">
-  	select	*
-  	from	xxx <--'xxx'ここに予算テーブル入れる-->
-  </select>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prospire.prospireweb.repository.BudgetFixMapper">
+
+	<!--
+		TODO: 以下の SQL のテーブル名を実際の予算テーブル名に置き換えてください。
+		例: FROM budget_table
+	-->
+
+	<select id="find" resultType="com.prospire.prospireweb.model.GetBudgetFix">
+		SELECT *
+		FROM budget
+	</select>
+
+</mapper>
