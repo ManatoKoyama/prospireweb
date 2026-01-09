@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="ja">
 <head>
- 予算FIX画面
+    <title>予算FIX画面</title>
     <meta charset="UTF-8" />
-    <script src="https://unpkg.com/vue@next"></script>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>[v-cloak]{display:none;}</style>
+</head>
 <body>  
   <div id="app" class="app-container">
     <div th:insert="fragments/menu_structure :: layoutContent"></div>
@@ -13,8 +14,8 @@
        <div class="aaa">
         <h3>期選択</h3>
           <div>
-            <select>
-              <option>--期を選択--</option>
+            <select v-model="selectedTerm">
+              <option value="">--期を選択--</option>
               <option th:each="term : ${terms}" 
                       th:value="${term}" 
                       th:text="${term}">
@@ -23,91 +24,119 @@
           </div>
         <h3>部署選択</h3>
           <div>
-            <select v-model="selectedDepartment" @change="onDepartmentChange">
+            <select v-model="selectedDepartment">
               <option value="">--部署を選択--</option>
-              <option th:each="dept : ${departments}" 
-                      :value="${dept}">
-                [[${dept}]]
-              </option>
+              <option th:each="dept : ${departments}" th:value="${dept}" th:text="${dept}"></option>
             </select>
           </div>
         <h3>今期予算目標:</h3>
           <div>
-            <h3> ¥{{ totalBudget }}</h3>
-            <script>
-            computed: {
-              totalBudget();{
-                return this.filteredBudgets.reduce((sum, b) => sum + b.amount, 0);
-              }
-            }
-            </script>
+            <h3> ¥{{ formatCurrency(selectedTerm && selectedDepartment ? totalBudget : 0) }}</h3>
           </div>
        </div>
-      <table>
+      <table v-if="selectedTerm && selectedDepartment">
   <thead>
     <tr>
+      <th>期</th>
       <th>部署</th>
+      <th>顧客</th>
       <th>予算</th>
       <th>実績</th>
     </tr>
   </thead>
-  <tbody>
+    <tbody>
     <tr v-for="budget in filteredBudgets" :key="budget.id">
-      <td>{{ budget.department }}</td>
-      <td>{{ budget.amount }}</td>
-      <td>{{ budget.actual }}</td>
+      <td>{{ budget.ki }}</td>
+      <td>{{ budget.bu }}</td>
+      <td>{{ budget.customer }}</td>
+      <td>{{ formatCurrency(budget.price) }}</td>
+      <td>{{ budget.status }}</td>
     </tr>
   </tbody>
 </table>
-  </div>
-  <script>
-    const { createApp } = Vue;
 
-    createApp({
-      data() {
-        return {
-          selectedDepartment: '',
-          allBudgets: [],       // API から取得
-          filteredBudgets: []   // 表示用
-        }
-      },
-      computed: {
-        totalBudget() {
-          // filteredBudgets が数値であることを仮定
-          return this.filteredBudgets.reduce((sum, b) => sum + (Number(b.amount) || 0), 0);
-        }
-      },
-      methods: {
-        applyFilter() {
-          if (!this.selectedDepartment) {
-            // 選択なしは全件表示（好みに合わせて）
-            this.filteredBudgets = this.allBudgets.slice();
-          } else {
-            this.filteredBudgets = this.allBudgets
-              .filter(b => b.department === this.selectedDepartment)
-              .sort((a, b) => b.amount - a.amount); // 予算額降順（例）
+  <!-- Vue CDN を同期的に読み込む -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.prod.js"></script>
+  
+  <!-- Vue アプリ初期化 -->
+  <script>
+    console.log('Vue グローバル確認:', typeof Vue);
+    
+    if (typeof Vue === 'undefined') {
+      console.error('Vue が読み込まれません');
+    } else {
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            selectedTerm: '',
+            selectedDepartment: '',
+            allBudgets: [],
+            filteredBudgets: [],
+            isMounted: false
           }
-        }
-      },
-      watch: {
-        selectedDepartment() {
-          this.applyFilter();
-        }
-      },
-      mounted() {
-        // 初期ロード: 全件取得してフィルタ（選択が空なら全件）
-        fetch('/api/budgets')
-          .then(res => res.json())
-          .then(data => {
-            this.allBudgets = data;
+        },
+        computed: {
+          totalBudget() {
+            // 表示されている表（filteredBudgets）の合算値を計算
+            return this.filteredBudgets.reduce((sum, b) => sum + (Number(b.price) || 0), 0);
+          }
+        },
+        methods: {
+          formatCurrency(n) {
+            try {
+              return new Intl.NumberFormat('ja-JP').format(Number(n || 0));
+            } catch (e) {
+              return n;
+            }
+          },
+          applyFilter() {
+            let filtered = this.allBudgets.slice();
+
+            // 期でフィルタリング
+            if (this.selectedTerm) {
+              filtered = filtered.filter(b => b.ki === this.selectedTerm);
+            }
+
+            // 部署でフィルタリング
+            if (this.selectedDepartment) {
+              filtered = filtered.filter(b => b.bu === this.selectedDepartment);
+            }
+
+            // 予算でソート（降順）
+            filtered.sort((a, b) => b.price - a.price);
+
+            this.filteredBudgets = filtered;
+          }
+        },
+        watch: {
+          selectedTerm() {
             this.applyFilter();
+          },
+          selectedDepartment() {
+            this.applyFilter();
+          }
+        },
+        mounted() {
+          console.log('Vue mounted');
+          this.isMounted = true;
+          fetch('/api/budgets', {
+            credentials: 'include'
           })
-          .catch(err => {
-            console.error('データ取得失敗', err);
-          });
-      }
-    }).mount('#app');
+            .then(res => res.json())
+            .then(data => {
+              console.log('API data:', data);
+              this.allBudgets = data;
+              this.applyFilter();
+            })
+            .catch(err => {
+              console.error('データ取得失敗', err);
+            });
+        }
+      }).mount('#app');
+    }
   </script>
-</body>
+  </div>
 
 </html>

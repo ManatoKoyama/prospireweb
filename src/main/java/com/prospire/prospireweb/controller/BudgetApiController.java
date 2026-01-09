@@ -16,7 +16,25 @@ public class BudgetApiController {
   @Autowired BudgetFixService service;
   
   @GetMapping("/budgets")
-  public List<GetBudgetFix> getAllBudgets() {
-    return service.getList();
+  public List<GetBudgetFix> getAllBudgets(@org.springframework.web.bind.annotation.RequestParam(name = "department", required = false) String department) {
+    if (department == null || department.isBlank()) {
+      return service.getList();
+    }
+    return service.findByDepartment(department);
+  }
+
+  @GetMapping("/departments")
+  public List<String> getDepartments() {
+    return service.getDepartments();
+  }
+
+  @GetMapping("/terms")
+  public List<String> getTerms() {
+    return service.getTerms();
+  }
+
+  @GetMapping("/budgets/total")
+  public long getTotal(@org.springframework.web.bind.annotation.RequestParam(name = "department", required = false) String department) {
+    return service.getTotalByDepartment(department);
   }
 }

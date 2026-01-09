@@ -21,6 +21,42 @@ public class BudgetFixService {
     return mapper.find();
   }
 
+  // 部署で絞り込み（サーバ側フィルタ）
+  public List<GetBudgetFix> findByDepartment(String department) {
+    if (department == null || department.isBlank()) {
+      return getList();
+    }
+    return getList().stream()
+      .filter(b -> department.equals(b.getBu()))
+      .toList();
+  }
+
+  // 部署一覧を取得（ユニークな部署を返す）
+  public List<String> getDepartments() {
+    return getList().stream()
+      .map(GetBudgetFix::getBu)
+      .filter(d -> d != null && !d.isBlank())
+      .distinct()
+      .toList();
+  }
+
+  // 期一覧を取得（ユニークな期を返す）。モデルに期フィールドがない場合は空リスト
+  public List<String> getTerms() {
+    return getList().stream()
+      .map(GetBudgetFix::getKi)
+      .filter(t -> t != null && !t.isBlank())
+      .distinct()
+      .toList();
+  }
+
+  // 部署ごとの合計金額を返す（存在しない場合は 0）
+  public long getTotalByDepartment(String department) {
+    return getList().stream()
+      .filter(b -> department == null || department.isBlank() || department.equals(b.getBu()))
+      .mapToLong(b -> b.getPrice())
+      .sum();
+  }
+
   public void saveBudgetFix(BudgetFixForm sessionForm){
     //TODO 予算FIXの保存ロジックを実装する
    

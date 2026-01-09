@@ -27,7 +27,6 @@ public class BudgetFixController {
   @Autowired
 	public BudgetFixService BFservice;
 
-  private HttpSession budgetFixsession;
 
   @ModelAttribute
   public BudgetFixForm setUpForm() {
@@ -36,12 +35,14 @@ public class BudgetFixController {
 
     //保存された予算を表示する
     @GetMapping("/budgetfix")
-    public String getMethodName(Model model) {
-      //
-		  List<GetBudgetFix> BudgetList =  BFservice.getList();
-		  model.addAttribute("budgets", BudgetList);
-      model.addAttribute("session", budgetFixsession);
-		  return "budgetFix";
+    public String getMethodName(Model model, HttpSession session) {
+      List<GetBudgetFix> BudgetList =  BFservice.getList();
+      model.addAttribute("budgets", BudgetList);
+      // departments と terms をテンプレートに渡す（Vue の選択肢に利用）
+      model.addAttribute("departments", BFservice.getDepartments());
+      model.addAttribute("terms", BFservice.getTerms());
+      model.addAttribute("session", session);
+      return "budgetFix";
     }
     
     //予算FIX確認画面へ入力内容とともにする遷移sessionに保存
