@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" />
+    <title>見込修正入力</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        .inline{
+            display: inline;
+        }
+        .budget-goal{
+            margin-left: 50px;
+        }
+
+        .table-container {
+            max-height: clamp(250px, 60vh, 600px);
+            overflow-y: auto;
+            border: 4px solid white; 
+            position: relative;
+            
+        }
+        
+        .form-table{
+            width: 100%;
+            max-width: 2000px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0 auto; /*テーブルを中央に配置*/
+            table-layout: fixed;
+        }
+
+        .form-table th, td{
+            border: 1px solid brown;
+            padding: 8px;
+            min-width: 60px;
+        }
+
+        .form-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 11;
+        }
+
+        .form-table th{
+            background-color: #ef4444;
+            color: white;
+            border: 1px solid brown;
+            box-sizing: border-box;
+            position: sticky;
+            top: 0;
+            z-index: 12;
+        }  
+
+          .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cancel-button {
+            background-color: #ccc;
+            color: #333;
+        }
+
+        .submit-button {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <div th:insert="fragments/menu_structure :: layoutContent"></div>
+        
+        <main class="content-area" th:with="isEmpty=${previousBudget == null or #lists.isEmpty(previousBudget)}">
+
+            <h2 class="main-title">見込修正入力画面</h2> 
+                <h3 class="inline" th:text="${ki} + '期の予算目標'"></h3><h3 class="inline budget-goal" th:text="${goalValue} + '円'"></h3>
+                <div class="error-message" th:if="${errorMessage != null}" th:text="${errorMessage}"></div>
+
+            <form th:action="@{/regist}" method="post" th:object="${registForm}">
+            <fieldset th:disabled="${isEmpty}">
+            <div class="table-container">
+                <div class="extra-space"></div>
+                <table class="form-table">
+                    <thead>
+                        <tr>
+                            <th>顧客</th>
+                            <th>案件(PJ名)</th>
+                            <th>確度</th>
+                            <th>受注月</th>
+                            <th>売上計上月</th>
+                            <th>費目</th>
+                            <th>細目</th>
+                            <th>金額</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${isEmpty}">
+                                <td><input type="text" disabled></td>
+                                <td><input type="text" disabled></td>
+                                <td><input type="text" disabled></td>
+                                <td><input type="text" disabled></td>
+                                <td><input type="text" disabled></td>
+                                <td><input type="text" disabled></td>
+                                <td><input type="text" disabled></td>
+                                <td><input type="number" disabled></td>
+                        </tr>
+                        <tr th:each="previousBudget, i : ${previousBudget}">
+                            <td> <input type="text" th:name="${'previousBudget[' + i.index + '].customer'}" th:value="${previousBudget.customer != null ? previousBudget.customer : ''}"></td>
+                            <td> <input type="text" th:name="${'previousBudget[' + i.index + '].project'}" th:value="${previousBudget.project != null ? previousBudget.project : ''}"></td>
+                            <td> <input type="text" th:name="${'previousBudget[' + i.index + '].orderProbability'}" th:value="${previousBudget.orderProbability != null ? previousBudget.orderProbability : ''}"></td>
+                            <td> <input type="text" th:name="${'previousBudget[' + i.index + '].orderM'}" th:value="${previousBudget.orderM != null ? #dates.format(previousBudget.orderM,'yyyy-MM-dd') : ''}"></td>
+                            <td> <input type="text" th:name="${'previousBudget[' + i.index + '].recordM'}" th:value="${previousBudget.recordM != null ? #dates.format(previousBudget.recordM,'yyyy-MM-dd') : ''}"></td>
+                            <td> <input type="text" th:name="${'previousBudget[' + i.index + '].expenseItem'}" th:value="${previousBudget.expenseItem != null ? previousBudget.expenseItem : ''}"></td>
+                            <td> <input type="text" th:name="${'previousBudget[' + i.index + '].details'}" th:value="${previousBudget.details != null ? previousBudget.details : ''}"></td>
+                            <td> <input type="number" th:name="${'previousBudget[' + i.index + '].price'}" th:value="${previousBudget.price != null ? previousBudget.price : ''}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </fieldset>
+
+            <div class="button-container">
+                <button class="cancel-button" name="cancel">キャンセル</button>
+                <button class="submit-button" name="regist" th:disabled="${#lists.isEmpty(previousBudget)}">登録</button>
+            </div>
+            </form>
+
+        </main>
+    </div>
+</body>
+</html>

@@ -14,8 +14,8 @@
             <ul class="menu-list">
                 <li><a th:href="@{/top}">TOP</a></li>
                 <li><a th:href="@{/top}">要員リスト</a></li> <!-- 暫定でTOPに遷移 -->
-                <li><a th:href="@{/top}">予算登録</a></li> <!-- 暫定でTOPに遷移 -->
-                <li><a th:href="@{/top}">見込修正</a></li> <!-- 暫定でTOPに遷移 -->
+                <li><a th:href="@{/budgetRegistCheck}">予算登録</a></li>
+                <li><a th:href="@{/revisionOfBudgetInput}">見込修正</a></li>
                 <li sec:authorize="hasAnyAuthority('20', '99')"><a th:href="@{/top}">実績登録</a></li> <!-- 暫定でTOPに遷移 -->
                 <li sec:authorize="hasAnyAuthority('00', '99')"><a th:href="@{/top}">予算FIX</a></li> <!-- 暫定でTOPに遷移 -->
             </ul>

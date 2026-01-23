@@ -8,3 +8,5 @@ INSERT IGNORE INTO mst_user(username,kanji_name_1,kanji_name_2,kana_name_1,kana_
   , ('460110','根本','秀章','ﾈﾓﾄ','ﾋﾃﾞｱｷ','00','30','hideaki.nemoto@pro-spire.co.jp','00','$2a$08$gyZIFDmttrrkbI8TPHy3RO1.FV2HCpknKffugNo7riFxu7uJ8vj7q',TIMESTAMP '2037-12-31 23:59:59.000',TIMESTAMP '2025-09-12 17:06:22.000','0','sysadmin',TIMESTAMP '2025-09-12 17:06:22.000','sysadmin',TIMESTAMP '2025-09-12 17:06:22.000')
   , ('900648','渡辺','英次','ﾜﾀﾅﾍﾞ','ｴｲｼﾞ','10','20','eiji.watanabe@pro-spire.co.jp','20','$2a$08$IKKElKQANyy.boyKKDH8A.VdVr7xdIRrSenObEG3EKY6xgpTesFUS',TIMESTAMP '2037-12-31 23:59:59.000',TIMESTAMP '2025-09-12 17:07:18.000','0','sysadmin',TIMESTAMP '2025-09-12 17:07:18.000','sysadmin',TIMESTAMP '2025-09-12 17:07:18.000')
   , ('999999','権限','ＡＬＬ','ｹﾝｹﾞﾝ','ALL','00','00','admin@pro-spire.co.jp','99','$2a$08$aaNKdqmKJMl/6EnLzuom1.KjWksGILWmTW5x21mLVpX.tuC13MqCO',TIMESTAMP '2037-12-31 23:59:59.000',TIMESTAMP '2025-09-12 17:07:18.000','0','sysadmin',TIMESTAMP '2025-10-11 17:07:18.000','sysadmin',TIMESTAMP '2025-09-12 17:07:18.000');
+
+

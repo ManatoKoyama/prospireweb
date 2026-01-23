@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.prospire.prospireweb.repository.BudgetMapper">
+  
+  <resultMap type="com.prospire.prospireweb.form.BudgetForm" id="BudgetFormResultMap"><!--  id属性は任意の値 -->
+  	<!--  columnはSQLのカラム　propertyはエンティティクラスのフィールド -->
+  	<result column="ki" property="ki"/>
+  	<result column="bu" property="bu"/>
+    <result column="customer" property="customer"/>
+    <result column="project" property="project"/>
+    <result column="order_probability" property="orderProbability"/>
+    <result column="order_m" property="orderM"/>
+    <result column="record_m" property="recordM"/>
+    <result column="expense_item" property="expenseItem"/>
+    <result column="details" property="details"/>
+    <result column="price" property="price"/>
+    <result column="status" property="status"/>
+    <result column="delete_flg" property="deleteFlg"/>
+    <result column="reg_user" property="regUser"/>
+    <result column="reg_date" property="regDate"/>
+    <result column="upd_user" property="updUser"/>
+    <result column="upd_date" property="updDate"/>
+  </resultMap>
+ 
+    <select id="findByKiAndBu" parameterType="map" resultMap="BudgetFormResultMap">
+        SELECT *
+        FROM
+            mst_budget 
+        WHERE
+            ki = #{ki} AND
+            bu = #{bu}
+    </select>
+
+    <delete id="deleteByKiAndBu" parameterType="map"> 
+        DELETE 
+        FROM 
+            mst_budget 
+        WHERE 
+            ki = #{ki} AND 
+            bu = #{bu} 
+      </delete>
+    
+    <insert id="registBudget" parameterType="java.util.List">
+        INSERT INTO mst_budget (
+            ki, 
+            bu, 
+            customer, 
+            project, 
+            order_probability, 
+            order_m, record_m, 
+            expense_item, 
+            details, 
+            price, 
+            status, 
+            delete_flg, 
+            reg_user, 
+            reg_date, 
+            upd_user, 
+            upd_date
+      ) VALUES 
+      <foreach collection="list" item="item" separator=",">
+      (
+            #{item.ki}, 
+            #{item.bu}, 
+            #{item.customer}, 
+            #{item.project}, 
+            #{item.orderProbability}, 
+            #{item.orderM}, 
+            #{item.recordM}, 
+            #{item.expenseItem}, 
+            #{item.details}, 
+            #{item.price}, 
+            #{item.status}, 
+            #{item.deleteFlg}, 
+            #{item.regUser}, 
+            #{item.regDate}, 
+            #{item.updUser}, 
+            #{item.updDate}
+      )
+      </foreach>
+    </insert> 
+
+
+  </mapper>

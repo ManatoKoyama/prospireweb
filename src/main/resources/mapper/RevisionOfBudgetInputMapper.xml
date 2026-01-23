@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.prospire.prospireweb.repository.RevisionOfBudgetInputMapper">
+  
+  <resultMap type="com.prospire.prospireweb.form.RevisionOfBudgetInputForm" id="RevisionOfBudgetInputFormResultMap"><!--  id属性は任意の値 -->
+  	<!--  columnはSQLのカラム　propertyはエンティティクラスのフィールド -->
+  	<result column="ki" property="ki"/>
+  	<result column="bu" property="bu"/>
+    <result column="customer" property="customer"/>
+    <result column="project" property="project"/>
+    <result column="order_probability" property="orderProbability"/>
+    <result column="order_m" property="orderM"/>
+    <result column="record_m" property="recordM"/>
+    <result column="expense_item" property="expenseItem"/>
+    <result column="details" property="details"/>
+    <result column="price" property="price"/>
+    <result column="status" property="status"/>
+    <result column="change_data_flg" property="changeDataFlg"/>
+    <result column="delete_flg" property="deleteFlg"/>
+    <result column="reg_user" property="regUser"/>
+    <result column="reg_date" property="regDate"/>
+    <result column="upd_user" property="updUser"/>
+    <result column="upd_date" property="updDate"/>
+  </resultMap>
+ 
+    <select id="findByKiAndBu" parameterType="map" resultMap="RevisionOfBudgetInputFormResultMap">
+        SELECT *
+        FROM
+            mst_revision_budget 
+        WHERE
+            ki = #{ki} AND
+            bu = #{bu}
+    </select>
+
+   
+  </mapper>

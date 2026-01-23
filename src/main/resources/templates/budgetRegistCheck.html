@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" />
+    <title>予算登録確認</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        .inline{
+            display: inline;
+        }
+        .budget-goal{
+            margin-left: 50px;
+        }
+
+        .table-container {
+            max-height: clamp(180px, 50vh, 600px);
+            overflow-y: auto;
+            border: 4px solid white; 
+            position: relative;
+            
+        }
+        
+        .form-table{
+            width: 100%;
+            max-width: 2000px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0 auto; /*テーブルを中央に配置*/
+            table-layout: fixed;
+        }
+
+        .form-table th, td{
+            border: 1px solid brown;
+            padding: 8px;
+            min-width: 60px;
+        }
+
+        .form-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 11;
+        }
+
+        .form-table th{
+            background-color: #ef4444;
+            color: white;
+            border: 1px solid brown;
+            box-sizing: border-box;
+            position: sticky;
+            top: 0;
+            z-index: 12;
+        }  
+        
+        .down-arrow {
+             width: 0; 
+            height: 0; 
+            border-left: 25px solid transparent; 
+            border-right: 25px solid transparent; 
+            border-top: 50px solid #ef4444; 
+            margin: 20px auto; 
+        }
+
+          .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cancel-button {
+            background-color: #ccc;
+            color: #333;
+        }
+
+        .submit-button {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <div th:insert="fragments/menu_structure :: layoutContent"></div>
+        
+        <main class="content-area">
+            
+            <h2 class="main-title">予算登録確認画面</h2> 
+                <h3 class="inline" th:text="${ki} + '期の予算目標'"></h3><h3 class="inline budget-goal" th:text="${goalValue} + '円'"></h3>
+                <div class="error-message" th:if="${errorMessage != null}" th:text="${errorMessage}"></div>
+
+            <h3>変更前</h3>
+            <div class="table-container">
+                <div class="extra-space"></div>
+                <table class="form-table">
+                    <thead>
+                        <tr>
+                            <th>顧客</th>
+                            <th>案件(PJ名)</th>
+                            <th>確度</th>
+                            <th>受注月</th>
+                            <th>売上計上月</th>
+                            <th>費目</th>
+                            <th>細目</th>
+                            <th>金額</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="previousBudget : ${previousBudget}">
+                            <td th:text="${previousBudget.customer != null ? previousBudget.customer : ''}"></td>
+                            <td th:text="${previousBudget.project != null ? previousBudget.project : ''}"></td>
+                            <td th:text="${previousBudget.orderProbability != null ? previousBudget.orderProbability : ''}"></td>
+                            <td th:text="${previousBudget.orderM != null ? #dates.format(previousBudget.orderM,'yyyy-MM-dd') : ''}"></td>
+                            <td th:text="${previousBudget.recordM != null ? #dates.format(previousBudget.recordM,'yyyy-MM-dd') : ''}"></td>
+                            <td th:text="${previousBudget.expenseItem != null ? previousBudget.expenseItem : ''}"></td>
+                            <td th:text="${previousBudget.details != null ? previousBudget.details : ''}"></td>
+                            <td th:text="${previousBudget.formattedPrice != null ? previousBudget.formattedPrice : ''}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="down-arrow"></div>
+
+            <h3>変更後</h3>
+            <form th:action="@{/regist}" method="post" th:object="${registForm}">
+            <input type="hidden" name="ki" th:value="${ki}" />
+            <input type="hidden" name="bu" th:value="${bu}" />
+            <div class="table-container">
+                <div class="extra-space"></div>
+                <table class="form-table">
+                    <thead>
+                        <tr>
+                            <th>顧客</th>
+                            <th>案件(PJ名)</th>
+                            <th>確度</th>
+                            <th>受注月</th>
+                            <th>売上計上月</th>
+                            <th>費目</th>
+                            <th>細目</th>
+                            <th>金額</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="budget, i : ${registForm.budgets}">
+                            <td>
+                                <input type="hidden" th:name="${'budgets[' + i.index + '].customer'}" th:value="${budget.customer}" />
+                                <span th:text="${budget.customer}"></span>
+                            </td>
+                            <td>
+                                <input type="hidden" th:name="${'budgets[' + i.index + '].project'}" th:value="${budget.project}" />
+                                <span th:text="${budget.project}"></span>
+                            </td>
+                            <td>
+                                <input type="hidden" th:name="${'budgets[' + i.index + '].orderProbability'}" th:value="${budget.orderProbability}" />
+                                <span th:text="${budget.orderProbability}"></span>
+                            </td>
+                            <td>
+                                <input type="hidden" th:name="${'budgets[' + i.index + '].orderM'}" th:value="${budget.orderM != null ? #dates.format(budget.orderM,'yyyy-MM-dd') : ''}" />
+                                <span th:text="${budget.orderM != null ? #dates.format(budget.orderM,'yyyy-MM-dd') : ''}"></span>
+                            </td>
+                            <td>
+                                <input type="hidden" th:name="${'budgets[' + i.index + '].recordM'}" th:value="${budget.recordM != null ? #dates.format(budget.recordM,'yyyy-MM-dd') : ''}" />
+                                <span th:text="${budget.recordM != null ? #dates.format(budget.recordM,'yyyy-MM-dd') : ''}"></span>
+                            </td>
+                            <td>
+                                <input type="hidden" th:name="${'budgets[' + i.index + '].expenseItem'}" th:value="${budget.expenseItem}" />
+                                <span th:text="${budget.expenseItem}"></span>
+                            </td>
+                            <td>
+                                <input type="hidden" th:name="${'budgets[' + i.index + '].details'}" th:value="${budget.details}" />
+                                <span th:text="${budget.details}"></span>
+                            </td>
+                            <td>
+                                <input type="hidden" th:name="${'budgets[' + i.index + '].price'}" th:value="${budget.price}" />
+                                <span th:text="${budget.formattedPrice}"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-container">
+                <button class="cancel-button" name="cancel">キャンセル</button>
+                <button class="submit-button" name="regist">登録</button>
+            </div>
+            </form>
+
+        </main>
+    </div>
+</body>
+</html>
