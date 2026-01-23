@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>見込修正確認画面</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <div th:insert="fragments/menu_structure :: layoutContent"></div>
+
+        <!-- メイン -->
+        <main class="content-area">
+            <!-- 画面タイトル -->
+            <h2 class="main-title">見込修正確認画面</h2>
+            <p>xx期の予算目標9,999千円</p>
+            
+            <div class="prospect-modify-bf-table-group">
+                <!-- 変更前テーブル -->
+                <p>変更前</p>
+                <table class="before-table" id="bfTable">
+                    <thead>
+                        <tr>
+                            <th width = "250">顧客</th>
+                            <th width = "350">案件(ＰＪ名)</th>
+                            <th width = "50">確度</th>
+                            <th width = "100">受注月</th>
+                            <th width = "100">売上計上月</th>
+                            <th width = "150">費目</th>
+                            <th width = "150">細目</th>
+                            <th width = "150">金額</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+           </div>
+            <div class="prospect-modify-af-table-group">
+                <!-- 変更後テーブル -->
+                <p>変更後</p>
+                <table class="after-table"  id="afTable">
+                    <thead>
+                        <tr>
+                            <th width = "250">顧客</th>
+                            <th width = "350">案件(ＰＪ名)</th>
+                            <th width = "50">確度</th>
+                            <th width = "100">受注月</th>
+                            <th width = "100">売上計上月</th>
+                            <th width = "150">費目</th>
+                            <th width = "150">細目</th>
+                            <th width = "150">金額</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="prospect-modify-button-group">
+                <button onclick="location.href='top'">キャンセル</button>
+                <button onclick="location.href='compBudgetRegistration'">登録</button>
+            </div>
+        </main>
+        
+    </div>
+
+</body>
+
+</html>
