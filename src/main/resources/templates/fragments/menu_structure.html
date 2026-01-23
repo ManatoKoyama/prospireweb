@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 
+<div th:fragment="menu"></div>
+
 <div th:fragment="layoutContent">
     
     <div class="sidebar-wrapper">
@@ -18,6 +20,7 @@
                 <li><a th:href="@{/top}">見込修正</a></li> <!-- 暫定でTOPに遷移 -->
                 <li sec:authorize="hasAnyAuthority('20', '99')"><a th:href="@{/achievements}">実績登録</a></li> <!-- 暫定でTOPに遷移 -->
                 <li sec:authorize="hasAnyAuthority('00', '99')"><a th:href="@{/top}">予算FIX</a></li> <!-- 暫定でTOPに遷移 -->
+                <li><a th:href="@{/admin/users/register}">ユーザー管理</a></li>
             </ul>
         </nav>
         

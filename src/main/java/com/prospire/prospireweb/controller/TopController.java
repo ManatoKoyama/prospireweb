@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("")
 public class TopController {
 
+    @GetMapping("/")
+    public String index(){
+        return "top"; // top.html を表示
+    }
+
     @GetMapping("/top")
     public String top(){
         return "top"; // top.html を表示

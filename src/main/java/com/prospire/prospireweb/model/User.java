@@ -7,7 +7,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +16,13 @@ public class User implements UserDetails {
     private String password; // ハッシュ化されたパスワード
     private boolean enabled;
     private String role; // 取得した権限情報を保持するフィールド
+    private String kanjiName1; // 漢字氏名（苗）
+    private String kanjiName2; // 漢字氏名（名）
+    private String kanaName1; // カナ氏名（苗）
+    private String kanaName2; // カナ氏名（名）
+    private String organization; // 所属組織
+    private String mailAddress; // メールアドレス
+    private String passwordExpiration; // パスワード有効期限
 
 
     // ----------------------------------------------------

@@ -24,7 +24,7 @@ public class SecurityConfig {
         http
             // 認可設定
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/login", "/css/**", "/js/**", "/images/**").permitAll() // ログインページと静的ファイルはアクセス許可
+                .requestMatchers("/login", "/admin/users/register", "/error", "/css/**", "/js/**", "/images/**").permitAll() // ログインページ、登録ページ、エラーページと静的ファイルはアクセス許可
                 .anyRequest().authenticated() // その他は認証が必要
             )
             // ログイン設定
