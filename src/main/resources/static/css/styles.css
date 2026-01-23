@@ -319,3 +319,32 @@ input:focus, select:focus {
     color: var(--text-light);
     background-color: transparent;
 }
+
+/* ======================================================= */
+/* 見込修正確認画面                                         */
+/* ======================================================= */
+
+.prospect-modify-bf-table-group,
+.prospect-modify-af-table-group {
+    margin-top: 10px;
+}
+
+.before-table, .after-table {
+    width: 100%;       /*画面の横幅を最大に設定*/
+}
+
+.before-table th,
+.after-table th {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+.prospect-modify-button-group {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.prospect-modify-button-group button {
+    width: 7em;
+    height: 3em;
+}

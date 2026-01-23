@@ -13,6 +13,11 @@ public class TopController {
         return "top"; // top.html を表示
     }
 
+    @GetMapping("/confProspectModify")
+    public String confProspectModify(){
+        return "conf-prospect-modify"; // 見込修正確認画面 を表示
+    }
+
     @GetMapping("/achievements")
     public String achievements(){
         return "achievements"; // achievements.html を表示
