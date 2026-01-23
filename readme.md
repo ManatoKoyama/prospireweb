@@ -12,7 +12,7 @@
 | 経理部権限 | 900648 | 900648 | 予算FIXが非表示 |
 
 ログイン画面のURL
-http://localhost:8080/
+<http://localhost:8080/>
 ※一旦、現時点はlocalhostになります
 
 ## 「schema.sql」と「data.sql」について
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS 既存名 (
     カラム1 データ型 制約,
     カラム2 データ型 制約
 );
-また、データも毎回、INSERT文が実行され、一意キー制約に違反しないように、「INSERT IGNORE INTO * VALUES *」を利用して定義しておくこと。
+また、データも毎回、INSERT文が実行され、一意キー制約に違反しないように、`INSERT IGNORE INTO * VALUES *`を利用して定義しておくこと。
 
 ## HTMLでのJavaScriptの呼び出し方法
 
@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS 既存名 (
 `<script th:src="@{/js/main.js}"></script>`
 
 ## ソースコードの構成
+
 📦src
  ┣ 📂main
  ┃ ┣ 📂java

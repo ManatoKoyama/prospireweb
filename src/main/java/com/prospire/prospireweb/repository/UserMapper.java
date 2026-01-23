@@ -7,4 +7,13 @@ import com.prospire.prospireweb.model.User;
 public interface UserMapper {
     /** ユーザー名でユーザー情報を検索 */
     User findByUsername(String username);
+    
+    /** 新規ユーザーを登録 */
+    int insertUser(User user);
+    
+    /** ユーザー情報を更新 */
+    int updateUser(User user);
+    
+    /** ユーザーを削除 */
+    int deleteUser(String username);
 }

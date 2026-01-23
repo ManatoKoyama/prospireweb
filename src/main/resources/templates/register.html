@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザー登録</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="app-container">
+        <div th:replace="fragments/menu_structure :: layoutContent"></div>
+        
+        <main class="content-area">
+            <div class="form-container">
+                <h2>ユーザー登録</h2>
+
+                <!-- 成功メッセージ -->
+                <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+                <!-- エラーメッセージ -->
+                <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+                <form method="POST" th:action="@{/admin/users/register}">
+                    <div class="form-group">
+                        <label for="username">ユーザー名:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">パスワード:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kanjiName1">漢字氏名（苗）:</label>
+                        <input type="text" id="kanjiName1" name="kanjiName1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kanjiName2">漢字氏名（名）:</label>
+                        <input type="text" id="kanjiName2" name="kanjiName2" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kanaName1">カナ氏名（苗）:</label>
+                        <input type="text" id="kanaName1" name="kanaName1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kanaName2">カナ氏名（名）:</label>
+                        <input type="text" id="kanaName2" name="kanaName2" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mailAddress">メールアドレス:</label>
+                        <input type="email" id="mailAddress" name="mailAddress" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organization">所属組織:</label>
+                        <input type="text" id="organization" name="organization" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">権限:</label>
+                        <select id="role" name="role">
+                            <option value="10">一般ユーザー</option>
+                            <option value="99">管理者</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-primary">登録</button>
+                        <a href="/" class="btn btn-secondary">キャンセル</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

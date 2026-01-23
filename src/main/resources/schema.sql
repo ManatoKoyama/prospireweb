@@ -22,6 +22,32 @@ upd_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP()) COMMENT '更新日時'
 );
 
 ------------------------------
+-- 見込テーブル (tbl_prospect)
+------------------------------
+DROP TABLE IF EXISTS tbl_prospect;
+CREATE TABLE IF NOT EXISTS tbl_prospect (
+ki VARCHAR(3) COMMENT '対象期',
+bu VARCHAR(10) COMMENT '部門',
+customer VARCHAR(30) NOT NULL COMMENT '顧客',
+project VARCHAR(90) NOT NULL COMMENT '案件名',
+order_probability VARCHAR(1) NOT NULL COMMENT '確度',
+order_m DATE COMMENT '受注月',
+record_m DATE COMMENT '売上計上月',
+expense_item VARCHAR(20) COMMENT '費目',
+details VARCHAR(30) COMMENT '細目',
+price INTEGER(7) NOT NULL COMMENT '金額',
+status VARCHAR(1)  COMMENT '状況区分',
+change_dete_flg VARCHAR(1) COMMENT '変更判別フラグ',
+delete_flg VARCHAR(1)  COMMENT '削除フラグ',
+reg_user VARCHAR(30) COMMENT '登録者',
+reg_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP()) COMMENT '登録日時',
+upd_user VARCHAR(30) COMMENT '更新者',
+upd_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP()) COMMENT '更新日時',
+PRIMARY KEY (ki, bu, order_m, record_m, expense_item, details, change_dete_flg),
+UNIQUE (customer, project, order_probability, delete_flg)
+);
+
+------------------------------
 -- 予算テーブル (mst_budget)
 ------------------------------
 CREATE TABLE IF NOT EXISTS mst_budget (
@@ -44,26 +70,26 @@ upd_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP()) COMMENT '更新日時',
 PRIMARY KEY (ki, bu, record_m, expense_item, details) --複合キー
 );
 
-------------------------------
--- 見込テーブル (mst_revision_budget)
-------------------------------
-CREATE TABLE IF NOT EXISTS mst_revision_budget (
-ki VARCHAR(3) NOT NULL COMMENT '対象期',
-bu VARCHAR(10) NOT NULL COMMENT '部門',
-customer VARCHAR(30) NOT NULL COMMENT '顧客',
-project VARCHAR(90) NOT NULL COMMENT '案件名',
-order_probability VARCHAR(1) NOT NULL COMMENT '確度',
-order_m DATE NOT NULL DEFAULT(CURRENT_TIMESTAMP()) COMMENT '受注月',
-record_m DATE NOT NULL DEFAULT(CURRENT_TIMESTAMP()) COMMENT '売上計上月',
-expense_item VARCHAR(20) NOT NULL COMMENT '費目',
-details VARCHAR(30) NOT NULL COMMENT '細目',
-price INTEGER(7) NOT NULL COMMENT '金額',
-status VARCHAR(1) DEFAULT 0  COMMENT '状況区分',
-change_data_flg VARCHAR(1) DEFAULT 0 COMMENT '変更判別フラグ',
-delete_flg VARCHAR(1) DEFAULT 0 COMMENT '削除フラグ',
-reg_user VARCHAR(30) COMMENT '登録者',
-reg_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP()) COMMENT '登録日時',
-upd_user VARCHAR(30) COMMENT '更新者',
-upd_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP()) COMMENT '更新日時',
-PRIMARY KEY (ki, bu, record_m, expense_item, details, change_data_flg) --複合キー
-);
+-- ------------------------------
+-- -- 見込テーブル (mst_revision_budget)
+-- ------------------------------
+-- CREATE TABLE IF NOT EXISTS mst_revision_budget (
+-- ki VARCHAR(3) NOT NULL COMMENT '対象期',
+-- bu VARCHAR(10) NOT NULL COMMENT '部門',
+-- customer VARCHAR(30) NOT NULL COMMENT '顧客',
+-- project VARCHAR(90) NOT NULL COMMENT '案件名',
+-- order_probability VARCHAR(1) NOT NULL COMMENT '確度',
+-- order_m DATE NOT NULL DEFAULT(CURRENT_TIMESTAMP()) COMMENT '受注月',
+-- record_m DATE NOT NULL DEFAULT(CURRENT_TIMESTAMP()) COMMENT '売上計上月',
+-- expense_item VARCHAR(20) NOT NULL COMMENT '費目',
+-- details VARCHAR(30) NOT NULL COMMENT '細目',
+-- price INTEGER(7) NOT NULL COMMENT '金額',
+-- status VARCHAR(1) DEFAULT 0  COMMENT '状況区分',
+-- change_data_flg VARCHAR(1) DEFAULT 0 COMMENT '変更判別フラグ',
+-- delete_flg VARCHAR(1) DEFAULT 0 COMMENT '削除フラグ',
+-- reg_user VARCHAR(30) COMMENT '登録者',
+-- reg_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP()) COMMENT '登録日時',
+-- upd_user VARCHAR(30) COMMENT '更新者',
+-- upd_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP()) COMMENT '更新日時',
+-- PRIMARY KEY (ki, bu, record_m, expense_item, details, change_data_flg) --複合キー
+-- );

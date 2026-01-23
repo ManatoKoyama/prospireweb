@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" />
+    <title>TOP</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="app-container">
+        
+        <div th:insert="fragments/menu_structure :: layoutContent"></div>
+        
+        <main class="content-area">
+            
+            <h2 class="main-title">実績登録</h2> 
+            
+            <div class="card-grid">
+
+                <table border="1">
+                <tr>
+                    <th>売上月</th>
+                    <th>費目</th>
+                    <th>金額</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item1_row1"></td>
+                    <td>
+                    <select name="category_row1">
+                        <option value=""></option>
+                        <option value="売上">売上</option>
+                        <option value="労務費">労務費</option>
+                        <option value="時間外手当">時間外手当</option>
+                        <option value="外注費">外注費</option>
+                        <option value="経費">経費</option>
+                    </select>
+                    </td>
+                    <td><input type="text" name="item2_row1"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item1_row2"></td>
+                    <td>
+                    <select name="category_row2">
+                        <option value=""></option>
+                        <option value="売上">売上</option>
+                        <option value="労務費">労務費</option>
+                        <option value="時間外手当">時間外手当</option>
+                        <option value="外注費">外注費</option>
+                        <option value="経費">経費</option>
+                    </select>
+                    </td>
+                    <td><input type="text" name="item2_row2"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item1_row3"></td>
+                    <td>
+                    <select name="category_row3">
+                        <option value=""></option>
+                        <option value="売上">売上</option>
+                        <option value="労務費">労務費</option>
+                        <option value="時間外手当">時間外手当</option>
+                        <option value="外注費">外注費</option>
+                        <option value="経費">経費</option>
+                    </select>
+                    </td>
+                    <td><input type="text" name="item2_row3"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item1_row4"></td>
+                    <td>
+                    <select name="category_row4">
+                        <option value=""></option>
+                        <option value="売上">売上</option>
+                        <option value="労務費">労務費</option>
+                        <option value="時間外手当">時間外手当</option>
+                        <option value="外注費">外注費</option>
+                        <option value="経費">経費</option>
+                    </select>
+                    </td>
+                    <td><input type="text" name="item2_row4"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item1_row5"></td>
+                    <td>
+                    <select name="category_row5">
+                        <option value=""></option>
+                        <option value="売上">売上</option>
+                        <option value="労務費">労務費</option>
+                        <option value="時間外手当">時間外手当</option>
+                        <option value="外注費">外注費</option>
+                        <option value="経費">経費</option>
+                    </select>
+                    </td>
+                    <td><input type="text" name="item2_row5"></td>
+                </tr>
+                </table>
+
+            </div>
+            <div style="text-align: right;">
+                <button>登録</button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

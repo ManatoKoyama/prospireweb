@@ -21,4 +21,23 @@
             username = #{username}
     </select>
 
+    <insert id="insertUser" parameterType="com.prospire.prospireweb.model.User">
+        INSERT INTO mst_user (username, kanji_name_1, kanji_name_2, kana_name_1, kana_name_2, role, organization, mail_adress, authority, password, password_expiration)
+        VALUES (#{username}, #{kanjiName1}, #{kanjiName2}, #{kanaName1}, #{kanaName2}, #{role}, #{organization}, #{mailAddress}, #{role}, #{password}, CURRENT_TIMESTAMP)
+    </insert>
+
+    <update id="updateUser" parameterType="com.prospire.prospireweb.model.User">
+        UPDATE mst_user
+        SET
+            password = #{password},
+            authority = #{role}
+        WHERE
+            username = #{username}
+    </update>
+
+    <delete id="deleteUser" parameterType="String">
+        DELETE FROM mst_user
+        WHERE username = #{username}
+    </delete>
+
   </mapper>

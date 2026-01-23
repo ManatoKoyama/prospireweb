@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>予算登録完了画面</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <div th:insert="fragments/menu_structure :: layoutContent"></div>
+
+        <main class="content-area">
+            <!-- 画面タイトル -->
+            <h2 class="main-title">予算登録完了画面</h2>
+
+            <p>××期○○BUの予算登録が完了しました。</p>
+
+
+            <button onclick="location.href='top'">メニュー</button>
+        </main>
+    </div>
+</body>
+
+</html>
