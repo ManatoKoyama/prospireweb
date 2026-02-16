@@ -8,6 +8,9 @@ import org.springframework.data.repository.query.Param;
 import com.prospire.prospireweb.form.BudgetForm;
 
 @Mapper
+/**
+ * 予算データ操作用の MyBatis マッパーインタフェース。
+ */
 public interface BudgetMapper {
     //変更前予算データ取得
     List<BudgetForm> findByKiAndBu(String ki, String bu);

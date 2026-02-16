@@ -1,5 +1,8 @@
 package com.prospire.prospireweb.exception;
 
+/**
+ * 予算の重複登録を表す例外クラス。
+ */
 public class BudgetDuplicateException extends RuntimeException{
 
     private final String details;

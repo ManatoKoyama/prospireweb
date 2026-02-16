@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.prospire.prospireweb.form.RevisionOfBudgetInputForm;
 
+/**
+ * 見込入力に関するサービスのインタフェース定義。
+ */
 public interface RevisionOfBudgetInputService{
 
     //見込テーブルデータ取得

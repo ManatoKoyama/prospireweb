@@ -1,5 +1,5 @@
 package com.prospire.prospireweb.controller;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,10 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 //@RequestMapping("/budgetfix")
+@RequiredArgsConstructor
 public class BudgetFixController {
 
-  @Autowired
-	public BudgetFixService BFservice;
+  /** 予算FIX関連のサービス */
+  private final BudgetFixService budgetFixService;
 
 
   @ModelAttribute
@@ -33,37 +34,38 @@ public class BudgetFixController {
     return new BudgetFixForm();
   }
 
-    //保存された予算を表示する
+    /** 保存された予算を表示します。 */
     @GetMapping("/budgetfix")
     public String getMethodName(Model model, HttpSession session) {
-      List<GetBudgetFix> BudgetList =  BFservice.getList();
+      List<GetBudgetFix> BudgetList =  budgetFixService.getList();
       model.addAttribute("budgets", BudgetList);
       // departments と terms をテンプレートに渡す（Vue の選択肢に利用）
-      model.addAttribute("departments", BFservice.getDepartments());
-      model.addAttribute("terms", BFservice.getTerms());
+      model.addAttribute("departments", budgetFixService.getDepartments());
+      model.addAttribute("terms", budgetFixService.getTerms());
       model.addAttribute("session", session);
       return "budgetFix";
     }
     
-    //予算FIX確認画面へ入力内容とともにする遷移sessionに保存
+    /** 予算FIX確認画面へ入力内容をセッションに保存します。 */
     @PostMapping("/comfirm")
     public String BudgetNoOrGoAndComment(Model model, BudgetFixForm fixform, HttpSession budgetFixsession) {
-      //sessionに保存
+      // sessionに保存
       budgetFixsession.setAttribute("FixForm", fixform);
       return "budgetFix";
     }
 
+    /** 確認後、予算FIXを保存します。バリデーションを実行します。 */
     @PostMapping("/complete")
     public String BudgetFixComplete(Model model, @Validated BudgetFixForm fixform, BindingResult bindingResult, HttpSession budgetFixsession) {
-      //sessionから取得
+      // sessionから取得
       BudgetFixForm sessionForm = (BudgetFixForm) budgetFixsession.getAttribute("FixForm");
-      BFservice.ValidateBudgetFix(sessionForm, bindingResult);
+      budgetFixService.ValidateBudgetFix(sessionForm, bindingResult);
       
       if (bindingResult.hasErrors()) {
         return "budgetFix";
       }
-      //DBに保存
-      BFservice.saveBudgetFix(sessionForm);
+      // DBに保存
+      budgetFixService.saveBudgetFix(sessionForm);
       return "budgetFix";
     }
 

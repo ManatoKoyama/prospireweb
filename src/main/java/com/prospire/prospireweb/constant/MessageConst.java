@@ -1,5 +1,8 @@
 package com.prospire.prospireweb.constant;
 
+/**
+ * メッセージキーを定義する定数クラス。
+ */
 public class MessageConst {
 
     //予算登録エラー

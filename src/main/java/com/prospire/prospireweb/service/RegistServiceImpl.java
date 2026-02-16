@@ -25,6 +25,13 @@ public class RegistServiceImpl implements RegistService{
     private final BudgetMapper mapper;
     private final HttpSession session;
 
+    /**
+     * 指定の期(`ki`)と部署(`bu`)に紐づく予算データを取得します。
+     * データが存在しない場合は、初期値を持つ1件のフォームを返します。
+     * @param ki 期
+     * @param bu 部署
+     * @return 取得した予算フォームのリスト
+     */
     @Override
     public List<BudgetForm> findByKiAndBu(String ki, String bu){
         List<BudgetForm> previousBudget = mapper.findByKiAndBu(ki, bu);
@@ -56,6 +63,13 @@ public class RegistServiceImpl implements RegistService{
  
     }
 
+    /**
+     * 予算リストを登録します。既存データは同一の期・部署で削除され、
+     * 与えられたリストがそのまま登録されます。
+     * 一意制約（重複）を検出した場合は BudgetDuplicateException をスローします。
+     * @param budgets 登録対象の予算フォームリスト
+     * @return 成功した場合 true
+     */
     @Override
     @Transactional
     public boolean registBudget(List<BudgetForm> budgets){
@@ -106,6 +120,9 @@ public class RegistServiceImpl implements RegistService{
         return true;
     }
 
+    /**
+     * 重複検出用のキーを生成します。
+     */
     private static String checkPkKey(String ki, String bu, Date recordM, String expenseItem, String details) {
         // 比較用のキー文字列（trim して正規化）
         return "期=" + ki

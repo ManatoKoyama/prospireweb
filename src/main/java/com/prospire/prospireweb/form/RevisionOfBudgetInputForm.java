@@ -8,6 +8,9 @@ import lombok.Data;
 *見込修正入力画面Formクラス
 */
 
+/**
+ * 見込入力フォーム（画面/フォーム）のデータを保持するクラス。
+ */
 @Data
 public class RevisionOfBudgetInputForm {
 

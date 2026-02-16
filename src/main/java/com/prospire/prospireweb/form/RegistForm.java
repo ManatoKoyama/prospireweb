@@ -7,6 +7,9 @@ import lombok.Data;
 *予算登録Formクラス
 */
 
+/**
+ * 予算登録用フォームをまとめるクラス。
+ */
 @Data
 public class RegistForm {
 

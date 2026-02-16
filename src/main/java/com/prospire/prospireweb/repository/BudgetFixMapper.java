@@ -8,6 +8,9 @@ import com.prospire.prospireweb.model.GetBudgetFix;
 
 
 @Mapper
+/**
+ * 予算FIX関連のデータアクセス用 MyBatis マッパーインタフェース。
+ */
 public interface BudgetFixMapper {
   //select全件
 	public List<GetBudgetFix> find();

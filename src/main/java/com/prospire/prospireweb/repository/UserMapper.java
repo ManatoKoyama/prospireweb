@@ -4,6 +4,9 @@ import org.apache.ibatis.annotations.Mapper;
 import com.prospire.prospireweb.model.User;
 
 @Mapper
+/**
+ * ユーザーデータ操作用の MyBatis マッパーインタフェース。
+ */
 public interface UserMapper {
     /** ユーザー名でユーザー情報を検索 */
     User findByUsername(String username);

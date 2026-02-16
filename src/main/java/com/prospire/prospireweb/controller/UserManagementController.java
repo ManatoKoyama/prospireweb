@@ -6,6 +6,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.prospire.prospireweb.model.User;
 import com.prospire.prospireweb.service.UserService;
 
+/**
+ * 管理者用のユーザー管理画面を提供するコントローラ。
+ */
 @Controller
 @RequestMapping("/admin/users")
 public class UserManagementController {

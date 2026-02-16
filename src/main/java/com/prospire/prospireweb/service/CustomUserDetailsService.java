@@ -12,10 +12,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserMapper userMapper;
 
+    /**
+     * コンストラクタ（コンポーネント注入）
+     * @param userMapper ユーザーデータアクセスマッパー
+     */
     public CustomUserDetailsService(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
 
+    /**
+     * 指定されたユーザー名でユーザー情報をロードします。
+     * Spring Security 用の `UserDetails` を返却します。
+     * @param username ユーザー名
+     * @return UserDetails 実装（見つからない場合は UsernameNotFoundException をスロー）
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userMapper.findByUsername(username);
@@ -24,11 +34,9 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
-        // データベースに存在しない enabled と role の値を Java 側で設定
-        
-        // アカウント有効フラグを設定 Todo:現状、ユーザー情報の有効性チェックはしないため、強制的にtrueを設定
+        // アカウント有効フラグを設定（現状は常に true を返す）
         user.setEnabled(true);
-        
+
         return user;
     }
 }

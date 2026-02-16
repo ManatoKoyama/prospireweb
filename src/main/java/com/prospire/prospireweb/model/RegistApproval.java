@@ -9,6 +9,9 @@ import lombok.Data;
  * 
  */
 
+/**
+ * 登録承認情報を表すモデルクラス。
+ */
 @Data
 public class RegistApproval {
   private String ki;                //対象期

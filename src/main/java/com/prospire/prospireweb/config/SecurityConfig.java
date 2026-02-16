@@ -10,6 +10,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+/**
+ * Spring Security の設定を行うクラス。
+ */
 public class SecurityConfig {
 
     // パスワードのハッシュ化 ※この実装は必ずしないと動作しない

@@ -2,7 +2,9 @@ package com.prospire.prospireweb.form;
 
 import java.io.Serializable;
 
-
+/**
+ * 予算FIX画面で利用するフォームデータを保持するクラス。
+ */
 public class BudgetFixForm implements Serializable {
   private static final long serialVersionUID = 1L;
   

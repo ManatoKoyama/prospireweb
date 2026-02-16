@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.prospire.prospireweb.form.BudgetForm;
 
+/**
+ * 予算登録に関するサービスのインタフェース定義。
+ */
 public interface RegistService{
 
     public List<BudgetForm> findByKiAndBu(String ki, String bu);

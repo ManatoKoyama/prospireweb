@@ -3,6 +3,9 @@ package com.prospire.prospireweb.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 見込（Prospect）を表すモデルクラス。
+ */
 @Data
 @NoArgsConstructor
 public class Prospect {

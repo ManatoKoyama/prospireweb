@@ -32,14 +32,18 @@ import jakarta.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class BudgetRegistCheckController {
 
-    //予算登録確認画面Service
+    // 予算登録確認画面用サービス
     private final RegistService service;
-    //セッション
+    // セッション
     private final HttpSession session;
-    //メッセージソース
+    // メッセージソース
     private final MessageSource messageSource;
 
-	// 予算登録確認画面表示
+    /**
+     * 予算登録確認画面を表示します（テストデータをセットして表示）。
+     * @param ki 期（デフォルト: 38）
+     * @param bu 部署（デフォルト: 1）
+     */
     @GetMapping("/budgetRegistCheck")
     public String budgetRegistCheck(@RequestParam(defaultValue = "38") String ki, @RequestParam(defaultValue = "1") String bu, Model model) throws ParseException{
 
@@ -90,7 +94,9 @@ public class BudgetRegistCheckController {
     }
 
 
-    // 予算登録
+    /**
+     * フォームから受け取った予算を登録します。
+     */
     @PostMapping(value="regist", params = "regist")
     public String registBudget(@ModelAttribute("registForm") RegistForm registForm,
                                BindingResult bindingResult,
@@ -132,7 +138,9 @@ public class BudgetRegistCheckController {
     }
 
     
-    // 予算登録キャンセル
+    /**
+     * 予算登録のキャンセル処理。セッションをクリアします。
+     */
     @PostMapping(value="regist", params = "cancel")
     public String cancelRegistBudget(@ModelAttribute("registForm") RegistForm registForm, Model model, SessionStatus sessionStatus) {
         sessionStatus.setComplete();

@@ -22,6 +22,9 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("")
 @RequiredArgsConstructor
+/**
+ * 見込入力関連の画面遷移を担当するコントローラ。
+ */
 public class RevisionOfBudgetInputContoroller {
 
     //予算登録確認画面Service

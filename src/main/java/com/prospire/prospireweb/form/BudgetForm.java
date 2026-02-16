@@ -8,6 +8,9 @@ import lombok.Data;
 *予算登録確認画面Formクラス
 */
 
+/**
+ * 予算データを扱うフォーム/モデルクラス。
+ */
 @Data
 public class BudgetForm {
 

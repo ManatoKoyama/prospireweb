@@ -4,13 +4,11 @@ import java.util.Date;
 
 import lombok.Data;
 
-/* 登録された予算取得用
- * 
- * 
- */
-
 @Data
 public class GetBudgetFix {
+/**
+ * 登録された予算（取得用）を表すモデルクラス。
+ */
   private String ki;                //対象期
   private String bu;                //対象BU
   private String customer;          //顧客
